@@ -7,10 +7,14 @@ const inquirer = require('inquirer');
 const jest = require('jest');
 const fs = require('fs');
 
+const {writeHTML, copyStyle} = require('./src/generatePage');
+const template = require('./src/page-template');
+
+
 teamMembers = [];
 
-function team() {
-    function getManager(){
+
+function getManager(){
     return inquirer.prompt([
         {
             type: 'input',
@@ -42,9 +46,13 @@ function team() {
     .then(response => {
         const manager = new Manager (response.managerName, reponse.managerID, reponse.managerEmail, reponse.managerOfficeNumber);
         teamMembers.push(manager);
+        console.log('HI')
+        newTeamMember();
+        console.log('Bye')
     })
 }
-    function getEngineer (){
+
+function getEngineer (){
         return inquirer.prompt([
             {
                 type: 'input',
@@ -70,9 +78,11 @@ function team() {
         .then(response => {
             const engineer = new Engineer (response.engineerName, reponse.engineerID, reponse.engineerEmail, reponse.engineerGithub);
             teamMembers.push(engineer);
+            newTeamMember();
         })
     }
-    function getIntern (){
+
+function getIntern (){
         return inquirer.prompt([
             {
                 type: 'input',
@@ -96,8 +106,45 @@ function team() {
             }
         ])
         .then(response => {
-            const intern = new Engineer (response.engineerName, reponse.engineerID, reponse.engineerEmail, reponse.engineerGithub);
-            teamMembers.push(engineer);
+            const intern = new Intern (response.internName, reponse.internID, reponse.internEmail, reponse.internSchool);
+            teamMembers.push(intern);
+            newTeamMember();
         })
     }
+
+
+const newTeamMember =() => {
+    return inquirer.prompt([
+        {
+        type: 'confirm',
+        name: 'addNewMember',
+        message: 'Would you like to add another team member?',
+        default: false
+        },
+        {
+            type: 'list',
+            message: 'Which employee would you like to input next?',
+            name: 'employeeSelect', 
+            choices: ['Engineer', 'Intern', 'Exit']
+        },
+    ]). then(response => {
+        const jobTitle = response.employeeSelect;
+        if (jobTitle === 'Engineer') {
+            getEngineer();
+        } else if (jobTitle === 'Intern'){
+            getIntern();
+        } else if (jobTitle === 'Exit'){
+            console.log('Team Sheet has been generated')
+            generatePage()
+        }
+    })
 }
+
+getManager()
+.then(newTeamMember())
+.then(teamData => {
+    return template(teamData);
+})
+.then(createHTML => {
+    return writeHTML (createHTML);
+})
