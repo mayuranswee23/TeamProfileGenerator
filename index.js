@@ -44,7 +44,7 @@ function getManager(){
     },
     ])
     .then(response => {
-        const manager = new Manager (response.managerName, reponse.managerID, reponse.managerEmail, reponse.managerOfficeNumber);
+        const manager = new Manager (response.managerName, response.managerID, response.managerEmail, response.managerOfficeNumber);
         teamMembers.push(manager);
         console.log('HI')
         newTeamMember();
@@ -76,7 +76,7 @@ function getEngineer (){
             }
         ])
         .then(response => {
-            const engineer = new Engineer (response.engineerName, reponse.engineerID, reponse.engineerEmail, reponse.engineerGithub);
+            const engineer = new Engineer (response.engineerName, response.engineerID, response.engineerEmail, response.engineerGithub);
             teamMembers.push(engineer);
             newTeamMember();
         })
@@ -106,7 +106,7 @@ function getIntern (){
             }
         ])
         .then(response => {
-            const intern = new Intern (response.internName, reponse.internID, reponse.internEmail, reponse.internSchool);
+            const intern = new Intern (response.internName, response.internID, response.internEmail, response.internSchool);
             teamMembers.push(intern);
             newTeamMember();
         })
@@ -141,10 +141,14 @@ const newTeamMember =() => {
 }
 
 getManager()
-.then(newTeamMember())
-.then(teamData => {
-    return template(teamData);
-})
-.then(createHTML => {
-    return writeHTML (createHTML);
-})
+// .then(newTeamMember())
+// .then(teamData => {
+//     return template(teamData);
+// })
+// .then(createHTML => {
+//     return writeHTML (createHTML);
+// })
+
+function generatePage (){
+    fs.writeFileSync('./dist/index.html', template(teamMembers))
+}
