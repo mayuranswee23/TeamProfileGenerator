@@ -1,3 +1,22 @@
 body {
-    background-color: green;
+    background-color: grey;
+}
+
+.title {
+    color: red;
+    text-align: center;
+    background-color: whitesmoke;
+    padding: 20px;
+}
+
+.card {
+   margin-left: 40%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.card-title{
+    text-align: center;
+    background-color: red;
+    color: whitesmoke;
 }

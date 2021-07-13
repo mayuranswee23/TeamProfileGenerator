@@ -36,19 +36,19 @@ function getManager(){
             message: "Enter the manager's office number",
             name: 'managerOfficeNumber'
         },
-        {
-            type: 'list',
-            message: 'Which employee would you like to input next?',
-            name: 'employeeSelect', 
-            choices: ['Engineer', 'Intern', 'Exit']
-    },
+    //     {
+    //         type: 'list',
+    //         message: 'Which employee would you like to input next?',
+    //         name: 'employeeSelect', 
+    //         choices: ['Engineer', 'Intern', 'Exit']
+    // },
     ])
     .then(response => {
         const manager = new Manager (response.managerName, response.managerID, response.managerEmail, response.managerOfficeNumber);
         teamMembers.push(manager);
         console.log('HI')
         newTeamMember();
-        console.log('Bye')
+        // console.log('Bye')
     })
 }
 
