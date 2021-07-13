@@ -46,7 +46,7 @@ function getManager(){
     .then(response => {
         const manager = new Manager (response.managerName, response.managerID, response.managerEmail, response.managerOfficeNumber);
         teamMembers.push(manager);
-        console.log('HI')
+        // console.log('HI')
         newTeamMember();
         // console.log('Bye')
     })
@@ -115,12 +115,12 @@ function getIntern (){
 
 const newTeamMember =() => {
     return inquirer.prompt([
-        {
-        type: 'confirm',
-        name: 'addNewMember',
-        message: 'Would you like to add another team member?',
-        default: false
-        },
+        // {
+        // type: 'confirm',
+        // name: 'addNewMember',
+        // message: 'Would you like to add another team member?',
+        // default: false
+        // },
         {
             type: 'list',
             message: 'Which employee would you like to input next?',
