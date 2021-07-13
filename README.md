@@ -8,5 +8,5 @@ To install this project, clone the repo onto your local device. Ensure Node.js i
 # Usage 
 In the terminal, enter node index. The user is prompted with a series of questions about the employees. After the questions are completed, then a HTML document is generated, and once deployed, displays all the information inputted. You can also run npm run test to ensure the tests are also working properly. 
 
-# link to Video
+# Link to Video
 https://drive.google.com/file/d/1gI3kIK-4tgQRlrlvhQWzlK0hcfYdRNYQ/view
